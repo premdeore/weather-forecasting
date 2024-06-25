@@ -103,7 +103,7 @@ export default function Weather() {
 
             </Grid>
             <Grid className="glass-card glass card-temp" style={{ display: 'flex', alignItems: 'stretch', justifyContent: 'center' }} item m={2} width={'68%'}>
-              {!loading && <WeatherCard weather={weather} />}
+              <WeatherCard weather={weather} loading={loading}/>
             </Grid>
 
           </Grid>

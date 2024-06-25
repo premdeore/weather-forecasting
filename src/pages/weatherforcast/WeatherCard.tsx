@@ -8,6 +8,7 @@ import { IWeatherforcastdata } from '../../types/weather';
 
 interface WeatherCardProps {
   weather: IWeatherforcastdata;
+  loading: boolean
 }
 
 interface IWeathericons {
@@ -26,7 +27,7 @@ interface IWeathericons {
 }
 
 
-const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
+const WeatherCard: React.FC<WeatherCardProps> = ({ weather ,loading }) => {
   const icons: IWeathericons = WeatherIcons();
 
 
@@ -43,7 +44,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
             <>
               <div key={key} className='image-card'>
                 <img src={value} style={{ width: "100px", height: "100px" }} alt={key} />
-                <span style={{textAlign:'center'}}>{getpropertydata(key as keyof IWeathericons)}</span>
+                <span style={{textAlign:'center'}}>{!loading && getpropertydata(key as keyof IWeathericons)}</span>
                 <span style={{textAlign:'center'}}>{key}</span>
               </div>
             </>
@@ -54,7 +55,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
             <>
              <div key={key} className='image-card'>
                 <img src={value} style={{ width: "100px", height: "100px" }} alt={key} />
-                <span style={{textAlign:'center'}}>{getpropertydata(key as keyof IWeathericons)}</span>
+                <span style={{textAlign:'center'}}>{!loading && getpropertydata(key as keyof IWeathericons)}</span>
                 <span style={{textAlign:'center'}}>{key}</span>
               </div>
             </>
