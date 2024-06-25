@@ -1,5 +1,5 @@
 import axios from 'axios';
-import env from "react-dotenv"
+// import env from "react-dotenv"
 
 const API_KEY = 'NvvPdWHGApZykAXP4nZzzXgQD9W3l2Xh'; // Replace with your Tomorrow.io API key
 const BASE_URL = 'https://api.tomorrow.io/v4/weather/realtime';

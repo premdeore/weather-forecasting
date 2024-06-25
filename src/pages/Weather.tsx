@@ -2,7 +2,7 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import "./Weather.css";
 import cloudyDay_1 from "../assets/amcharts_weather_icons_1.0.0/animated/cloudy-day-1.svg"
-
+import { ToastContainer, toast } from 'react-toastify';
 import { Weatherforcastdata, weatherConditions } from "../constant/weather";
 import WeatherCard from "./weatherforcast/WeatherCard";
 import { getWeather } from "../services/weatherService";
@@ -14,7 +14,7 @@ export default function Weather() {
   const [city, setCity] = React.useState<string>("Ahmedabad");
   const [weather, setWeather] = React.useState<IWeatherforcastdata>(Weatherforcastdata);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [error, setError] = React.useState<string | null>(null);
+//   const [error, setError] = React.useState<string | null>(null);
 
   //#endregion
   //#region  methods region
@@ -63,12 +63,14 @@ export default function Weather() {
   // api async function
   const fetchWeather = async (city:string) => {
     setLoading(true);
-    setError(null);
+    // setError(null);
     try {
       const data = await getWeather(city);
       setWeather(data);
+      toast.success("Successfully fetch weather forcast");
     } catch (error) {
-      setError('Error fetching weather data');
+    //   setError();
+      toast.error('Error fetching weather data')
     } finally {
       setLoading(false);
     }
@@ -101,7 +103,7 @@ export default function Weather() {
 
             </Grid>
             <Grid className="glass-card glass card-temp" style={{ display: 'flex', alignItems: 'stretch', justifyContent: 'center' }} item m={2} width={'68%'}>
-              <WeatherCard weather={weather} />
+              {!loading && <WeatherCard weather={weather} />}
             </Grid>
 
           </Grid>
@@ -127,6 +129,7 @@ export default function Weather() {
 
         </Grid>
       </Grid>
+      <ToastContainer/>
     </>
   );
 }
