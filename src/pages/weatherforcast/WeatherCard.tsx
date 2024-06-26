@@ -40,25 +40,14 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ weather ,loading }) => {
       <Grid className="weather-card">
         <Grid item className='card-imageline'>
 
-          {Object.entries(icons).slice(0, 5).map(([key, value]) => (
-            <>
+          {Object.entries(icons).map(([key, value]) => (
+            
               <div key={key} className='image-card'>
                 <img src={value} style={{ width: "100px", height: "100px" }} alt={key} />
                 <span style={{textAlign:'center'}}>{!loading && getpropertydata(key as keyof IWeathericons)}</span>
                 <span style={{textAlign:'center'}}>{key}</span>
               </div>
-            </>
-          ))}
-        </Grid>
-        <Grid item className='card-imageline'>
-          {Object.entries(icons).slice(5).map(([key, value]) => (
-            <>
-             <div key={key} className='image-card'>
-                <img src={value} style={{ width: "100px", height: "100px" }} alt={key} />
-                <span style={{textAlign:'center'}}>{!loading && getpropertydata(key as keyof IWeathericons)}</span>
-                <span style={{textAlign:'center'}}>{key}</span>
-              </div>
-            </>
+            
           ))}
         </Grid>
       </Grid>

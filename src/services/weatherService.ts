@@ -1,8 +1,7 @@
 import axios from 'axios';
-// import env from "react-dotenv"
 
-const API_KEY = 'NvvPdWHGApZykAXP4nZzzXgQD9W3l2Xh'; // Replace with your Tomorrow.io API key
-const BASE_URL = 'https://api.tomorrow.io/v4/weather/realtime';
+const API_KEY = JSON.stringify(import.meta.env.VITE_WEATHER_API_KEY); 
+const BASE_URL = JSON.stringify(import.meta.env.VITE_WEATHER_BASE_URL);
 
 export const getWeather = async (city:string) => {
   try {

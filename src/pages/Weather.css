@@ -1,5 +1,5 @@
 .matte-background {
-  background: rgb(2, 0, 36);
+  background: rgb(156, 152, 223);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(115, 197, 254, 1) 0%, rgba(235, 246, 207, 1) 99%);
   min-height: 100vh;
   padding: 20px;
@@ -25,6 +25,7 @@
   height: auto;
   margin: 16px;
   text-align: center;
+  padding: 20px;
   background-color: #f9f9f9;
   bottom: 0;
   align-items: stretch;
@@ -59,7 +60,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
 
-  margin: 20px auto;
+  /* margin: 20px auto; */
   text-align: center;
   opacity: .5;
 }
@@ -70,7 +71,7 @@
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  margin: 20px;
+  /* margin: 20px; */
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
@@ -87,9 +88,9 @@
   align-items: center;
 }
 
-.search-card {
+/* .search-card {
   width: 92vw !important;
-}
+} */
 
 .search-input {
   flex: 1;
