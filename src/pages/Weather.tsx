@@ -25,7 +25,7 @@ export default function Weather() {
   const [error, setError] = React.useState<string | null>(null);
   const [map, setMap] = React.useState<google.maps.Map | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-  const [data, setData] = React.useState<any>(null);
+  // const [data, setData] = React.useState<any>(null);
   const [location, setLocation] = React.useState<{
     lat: number;
     lng: number;
@@ -79,19 +79,19 @@ export default function Weather() {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-  const debounce = (func: any, delay: number) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let timeout: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return function executedFunction(...args: any[]) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, delay);
-    };
-  };
+  // const debounce = (func: any, delay: number) => {
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   let timeout: any;
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   return function executedFunction(...args: any[]) {
+  //     const later = () => {
+  //       clearTimeout(timeout);
+  //       func(...args);
+  //     };
+  //     clearTimeout(timeout);
+  //     timeout = setTimeout(later, delay);
+  //   };
+  // };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   // const debouncedSearch = React.useCallback(debounce(handleSearch, 500), []);
@@ -141,7 +141,7 @@ export default function Weather() {
             (component: any) => component.types.includes("locality")
           )?.long_name;
           setAddress(city);
-          setData(data);
+          // setData(data);
           setAddress(formattedAddress);
         } catch (err) {
           console.log(err, "err");
@@ -256,7 +256,7 @@ export default function Weather() {
           )}
           {address && <div>Address: {address}</div>}
           <div>
-            <h2>{city}</h2>
+            {!error && <h2>{city}</h2>}
           </div>
           </Grid>
         </Grid>
