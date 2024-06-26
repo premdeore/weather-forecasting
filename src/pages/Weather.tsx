@@ -93,7 +93,6 @@ export default function Weather() {
   //   };
   // };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   // const debouncedSearch = React.useCallback(debounce(handleSearch, 500), []);
 
   // api async function
