@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // const API_URL = 'https://api.geopol.io/v1/endpoint';
-const API_KEY = JSON.stringify(import.meta.env.VITE_LOCATION_API_KEY); 
-const GEOCODING_API_URL = JSON.stringify(import.meta.env.VITE_GEOCODING_API_URL);
+const API_KEY = import.meta.env.VITE_LOCATION_API_KEY; 
+const GEOCODING_API_URL = import.meta.env.VITE_GEOCODING_API_URL;
 
 export const getGeolocationData = async (lat: number, lng: number) => {
     try {
