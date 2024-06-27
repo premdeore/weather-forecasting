@@ -4,21 +4,22 @@ import cloudyDay_1 from "../assets/amcharts_weather_icons_1.0.0/animated/cloudy-
 import { Weatherforcastdata, weatherConditions } from "../constant/weather";
 import WeatherCard from "./weatherforcast/WeatherCard";
 import { getWeather } from "../services/weatherService";
-import { IWeatherforcastdata } from "../types/weather";
+import { IWeatherData, IWeatherforcastdata } from "../types/weather";
 import { getGeolocationData } from "../services/locationService";
-import { GoogleMap, LoadScript} from "@react-google-maps/api";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import "./Weather.css";
+import Advisory from "./advisory/Advisory";
+import { WeatherData } from "../constant/AdvisoriesSuggestion";
 
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 export default function Weather() {
-
   //#region variable region
   const [city, setCity] = React.useState<string>("Ahmedabad");
   const [weather, setWeather] =
-  React.useState<IWeatherforcastdata>(Weatherforcastdata);
+    React.useState<IWeatherforcastdata>(Weatherforcastdata);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [address, setAddress] = React.useState<string | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -31,9 +32,8 @@ export default function Weather() {
     lng: number;
   } | null>(null);
 
-  const API_KEY = import.meta.env.VITE_LOCATION_API_KEY
+  const API_KEY = import.meta.env.VITE_LOCATION_API_KEY;
 
-  console.log(address ,"address")
   //#endregion
 
   //#region  methods region
@@ -51,15 +51,19 @@ export default function Weather() {
 
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, (results, status) => {
-      if (status === 'OK' && (results !== null && results[0]?.geometry?.location)) {
+      if (
+        status === "OK" &&
+        results !== null &&
+        results[0]?.geometry?.location
+      ) {
         const location = results[0].geometry.location;
         setLocation({ lat: location.lat(), lng: location.lng() });
         if (map) {
           map.panTo({ lat: location.lat(), lng: location.lng() });
-          map.setZoom(12); 
+          map.setZoom(12);
         }
       } else {
-        setError('Location not found');
+        setError("Location not found");
       }
     });
   };
@@ -77,6 +81,16 @@ export default function Weather() {
     weather.data.values.weatherCode,
     weather.data.values.cloudCover
   );
+
+  let WeatherAnalysisData: IWeatherData = WeatherData;
+  WeatherAnalysisData = {
+    temperature: weather.data.values.temperature,
+    humidity: weather.data.values.humidity,
+    windSpeed: weather.data.values.windSpeed,
+    visibility: weather.data.values.visibility,
+    rainIntensity: weather.data.values.rainIntensity,
+    weatherCode: weather.data.values.weatherCode,
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   // const debounce = (func: any, delay: number) => {
@@ -230,33 +244,38 @@ export default function Weather() {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-        <Grid
+          <Grid
             container
             alignItems="center"
             justifyContent="center"
             flexWrap={"wrap"}
             className="search-grid glass"
           >
-          {location && (
-            <LoadScript
-              googleMapsApiKey={
-                API_KEY
-              }
-            >
-              <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={location}
-                zoom={10}
-                onLoad={(map) => setMap(map)}
-              >
-                {/* <Marker position={location} /> */}
-              </GoogleMap>
-            </LoadScript>
-          )}
-          {address && <div>Address: {address}</div>}
-          <div>
-            {!error && <h2>{city}</h2>}
-          </div>
+            {location && (
+              <LoadScript googleMapsApiKey={API_KEY}>
+                <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={location}
+                  zoom={10}
+                  onLoad={(map) => setMap(map)}
+                >
+                  {/* <Marker position={location} /> */}
+                </GoogleMap>
+              </LoadScript>
+            )}
+            {address && <div>Address: {address}</div>}
+            <div>{!error && <h2>{city}</h2>}</div>
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Grid
+            container
+            alignItems="center"
+            justifyContent="center"
+            flexWrap={"wrap"}
+            className="search-grid glass"
+          >
+            <Advisory weatherAnalysisData={WeatherAnalysisData} />
           </Grid>
         </Grid>
       </Grid>

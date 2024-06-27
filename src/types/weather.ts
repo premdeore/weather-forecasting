@@ -32,3 +32,19 @@ export interface IWeatherforcastdata {
       type: string
     }
   }
+
+
+
+export interface IWeatherData {
+    temperature: number;
+    humidity: number;
+    windSpeed: number;
+    visibility: number;
+    rainIntensity: number;
+    weatherCode: number;
+  }
+  
+export interface IAdvisory {
+    type: string;
+    message: string;
+  }
